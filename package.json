@@ -1,0 +1,11 @@
+{
+  "name": "sfc_bus",
+  "version": "1.0.0",
+  "description": "SFC Bus LINE bot",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
