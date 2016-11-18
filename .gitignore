@@ -1,0 +1,9 @@
+.bundle
+vendor
+node_modules
+
+scripts/
+
+# password --------
+
+config.js
