@@ -22,46 +22,40 @@ const DATE_TYPE = {
 
 exports.find_bus = aa.thunkify((from, to, hour, limit, cb) => {
   let now = moment().tz("Asia/Tokyo");
-  pool.connect((err, client, done) => {
-    client.query(
-      'SELECT * FROM time_tables WHERE from_location = $1 AND to_location = $2 AND dtype = $3 AND hour = $4 LIMIT $5',
-      [from, to, dtype(), hour, limit],
-      (err, result) => { 
-        done(); 
-        if   (err) { cb([]); }
-        else { cb(result.rows); }
-      });
-  });
+  query(
+    'SELECT * FROM time_tables WHERE from_location LIKE $1 AND to_location LIKE $2 AND dtype = $3 AND hour = $4 ORDER BY hour, minute LIMIT $5',
+    [`${from}%`, `${to}%`, dtype(), hour, limit],
+    cb
+  );
 });
 
 exports.find_next_bus = aa.thunkify((from, to, cb) => {
   let now = moment().tz("Asia/Tokyo");
-  pool.connect((err, client, done) => {
-    client.query(
-      'SELECT * FROM time_tables WHERE from_location = $1 AND to_location = $2 AND dtype = $3 AND ((hour = $4 AND minute >= $5) OR (hour > $4 AND minute > 0)) LIMIT 1',
-      [from, to, dtype(), now.hour(), now.minute()],
-      (err, result) => { 
-        done(); 
-        if   (err) { cb([]); }
-        else { cb(result.rows); }
-      });
-  });
+  query(
+    'SELECT * FROM time_tables WHERE from_location LIKE $1 AND to_location LIKE $2 AND dtype = $3 AND ((hour = $4 AND minute >= $5) OR (hour > $4 AND minute > 0)) ORDER BY hour, minute LIMIT 1',
+    [`${from}%`, `${to}%`, dtype(), now.hour(), now.minute()],
+    cb
+  );
 });
 
 exports.find_last_bus = aa.thunkify((from, to, cb) => {
-  pool.connect((err, client, done) => {
-    client.query(
-      'SELECT * FROM time_tables WHERE from_location = $1 AND to_location = $2 AND dtype = $3 ORDER BY hour DESC, minute DESC LIMIT 1',
-      [from, to, dtype()],
-      (err, result) => { 
-        done(); 
-        if   (err) { cb([]); }
-        else { cb(result.rows); }
-      });
-  });
+  query(
+    'SELECT * FROM time_tables WHERE from_location LIKE $1 AND to_location LIKE $2 AND dtype = $3 ORDER BY hour DESC, minute DESC LIMIT 1',
+    [`${from}%`, `${to}%`, dtype()], cb
+  );
 });
 
 // private --------------------------------------
+
+const query = (q, args, cb) => {
+  pool.connect((err, client, done) => {
+    client.query(q, args, (err, result) => {
+      done();
+      if   (err) { cb([]); }
+      else { cb(result.rows); }
+    });
+  });
+}
 
 const dtype = () => {
   let it = moment().format('dddd');

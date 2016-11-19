@@ -31,10 +31,10 @@ module.exports = {
       msg.text('SFC busでは、「出発地 目的地 時間(~25)」を半角スペースで区切って送ることで欲しい時刻表を素早く知ることができるよ！'),
       msg.text(`「出発地」「目的地」には、それを表す半角英単語1文字を入れてね。
 対応してる場所はこれだよ。
-k: 慶應義塾大学本館前
+k: 慶応大学本館前, 慶応大学
 s: 湘南台駅西口
 t: 辻堂駅北口`),
-      msg.text('例えば「s k 15」って送ったら、「湘南台駅西口から慶應義塾大学本館前に向かう15時台のバスの時刻表を見せて」っていう意味になるよ'),
+      msg.text('例えば「s k 15」って送ったら、「湘南台駅西口から慶応大学本館前(慶応大学)に向かう15時台のバスの時刻表を見せて」っていう意味になるよ'),
       msg.text('湘南台駅から辻堂駅へ向かうバスは対応してないから注意してね。')
     ]
   },
@@ -49,19 +49,19 @@ t: 辻堂駅北口`),
   // ask next -----------------------------------
   ASK_NEXT: [
     msg.buttons('どこからどこへ向かうバス？', [
-      msg.buttonAction('慶応本館 → 湘南台', 'action=next_bus&from=慶應義塾大学本館前&to=湘南台駅西口'),
-      msg.buttonAction('慶応本館 → 辻堂', 'action=next_bus&from=慶應義塾大学本館前&to=辻堂駅北口'),
-      msg.buttonAction('湘南台 → 慶応本館', 'action=next_bus&from=湘南台駅西口&to=慶應義塾大学本館前'),
-      msg.buttonAction('辻堂 → 慶応本館', 'action=next_bus&from=辻堂駅北口&to=慶應義塾大学本館前')
+      msg.buttonAction('慶応 → 湘南台', 'action=next_bus&from=慶応&to=湘南台駅西口'),
+      msg.buttonAction('慶応 → 辻堂', 'action=next_bus&from=慶応&to=辻堂駅北口'),
+      msg.buttonAction('湘南台 → 慶応本館', 'action=next_bus&from=湘南台駅西口&to=慶応'),
+      msg.buttonAction('辻堂 → 慶応本館', 'action=next_bus&from=辻堂駅北口&to=慶応')
     ])
   ],
   // ask last -----------------------------------
   ASK_LAST: [
     msg.buttons('どこからどこへ向かうバス？', [
-      msg.buttonAction('慶応本館 → 湘南台', 'action=last_bus&from=慶應義塾大学本館前&to=湘南台駅西口'),
-      msg.buttonAction('慶応本館 → 辻堂', 'action=last_bus&from=慶應義塾大学本館前&to=辻堂駅北口'),
-      msg.buttonAction('湘南台 → 慶応本館', 'action=last_bus&from=湘南台駅西口&to=慶應義塾大学本館前'),
-      msg.buttonAction('辻堂 → 慶応本館', 'action=last_bus&from=辻堂駅北口&to=慶應義塾大学本館前')
+      msg.buttonAction('慶応 → 湘南台', 'action=last_bus&from=慶応&to=湘南台駅西口'),
+      msg.buttonAction('慶応 → 辻堂', 'action=last_bus&from=慶応&to=辻堂駅北口'),
+      msg.buttonAction('湘南台 → 慶応本館', 'action=last_bus&from=湘南台駅西口&to=慶応'),
+      msg.buttonAction('辻堂 → 慶応本館', 'action=last_bus&from=辻堂駅北口&to=慶応')
     ])
   ]
 }

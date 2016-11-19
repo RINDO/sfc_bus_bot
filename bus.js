@@ -5,7 +5,7 @@ const moment = require('moment');
 const aa     = require('aa');
 
 const LOC = {
-  "k" : '慶應義塾大学本館前',
+  "k" : '慶応',
   "t" : '辻堂駅北口',
   "s" : '湘南台駅西口'
 }
@@ -45,7 +45,7 @@ const toText = (result) => {
     str = "その時間帯のバスはありません";
   } else {
     result.forEach((it, idx) => {
-      str += it.hour + "時" + it.minute + "分発";
+      str += it.hour + "時" + it.minute + "分発" + "(" + it.from_location + "発: " + it.btype + ")" ;
 
       if (idx+1 < result.length) { str += "\n"; }
     });
