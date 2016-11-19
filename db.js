@@ -24,8 +24,8 @@ exports.find_bus = aa.thunkify((from, to, hour, limit, cb) => {
   let now = moment().tz("Asia/Tokyo");
   pool.connect((err, client, done) => {
     client.query(
-      'SELECT * FROM time_tables WHERE from_location = $1 AND to_location = $2 AND dtype = $3 AND ((hour = $4 AND minute >= $5) OR (hour > $4 AND minute > 0)) LIMIT $6',
-      [from, to, dtype(), hour, now.minute(), limit],
+      'SELECT * FROM time_tables WHERE from_location = $1 AND to_location = $2 AND dtype = $3 AND hour = $4 LIMIT $5',
+      [from, to, dtype(), hour, limit],
       (err, result) => { 
         done(); 
         if   (err) { cb([]); }
@@ -64,7 +64,7 @@ exports.find_last_bus = aa.thunkify((from, to, cb) => {
 // private --------------------------------------
 
 const dtype = () => {
-  let it = moment().format('dddd')
+  let it = moment().format('dddd');
 
   if (it == 0)      return DATE_TYPE.HOLIDAY;
   else if (it == 6) return DATE_TYPE.SATURDAY;
