@@ -42,6 +42,8 @@ const handleReply = (text, token) => {aa(function *() {
 
   let type = qa.detect_action(text);
 
+  if (type == qa.TYPE.CANCEL) return;
+
   if (type == qa.TYPE.HELP) {
     sendUsage(token); return;
   }
@@ -52,10 +54,6 @@ const handleReply = (text, token) => {aa(function *() {
 
   if (type == qa.TYPE.LAST_BUS) {
     sendAskLast(token); return;
-    return;
-  }
-
-  if (type == qa.TYPE.CANCEL) {
     return;
   }
 

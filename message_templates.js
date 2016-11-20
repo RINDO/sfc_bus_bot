@@ -51,8 +51,8 @@ t: 辻堂駅北口`),
     msg.buttons('どこからどこへ向かうバス？', [
       msg.buttonAction('慶応 → 湘南台', 'action=next_bus&from=慶応&to=湘南台駅西口'),
       msg.buttonAction('慶応 → 辻堂', 'action=next_bus&from=慶応&to=辻堂駅北口'),
-      msg.buttonAction('湘南台 → 慶応本館', 'action=next_bus&from=湘南台駅西口&to=慶応'),
-      msg.buttonAction('辻堂 → 慶応本館', 'action=next_bus&from=辻堂駅北口&to=慶応')
+      msg.buttonAction('湘南台 → 慶応', 'action=next_bus&from=湘南台駅西口&to=慶応'),
+      msg.buttonAction('辻堂 → 慶応', 'action=next_bus&from=辻堂駅北口&to=慶応')
     ])
   ],
   // ask last -----------------------------------
@@ -60,8 +60,8 @@ t: 辻堂駅北口`),
     msg.buttons('どこからどこへ向かうバス？', [
       msg.buttonAction('慶応 → 湘南台', 'action=last_bus&from=慶応&to=湘南台駅西口'),
       msg.buttonAction('慶応 → 辻堂', 'action=last_bus&from=慶応&to=辻堂駅北口'),
-      msg.buttonAction('湘南台 → 慶応本館', 'action=last_bus&from=湘南台駅西口&to=慶応'),
-      msg.buttonAction('辻堂 → 慶応本館', 'action=last_bus&from=辻堂駅北口&to=慶応')
+      msg.buttonAction('湘南台 → 慶応', 'action=last_bus&from=湘南台駅西口&to=慶応'),
+      msg.buttonAction('辻堂 → 慶応', 'action=last_bus&from=辻堂駅北口&to=慶応')
     ])
   ]
 }

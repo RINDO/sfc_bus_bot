@@ -45,7 +45,9 @@ const toText = (result) => {
     str = "その時間帯のバスはありません";
   } else {
     result.forEach((it, idx) => {
-      str += it.hour + "時" + it.minute + "分発" + "(" + it.from_location + "発: " + it.btype + ")" ;
+      // ゼロ埋め
+      let minute = ('0' + it.minute).slice(-2);
+      str += it.hour + ':' + minute + '(' + it.from_location + '発: ' + it.btype + ')';
 
       if (idx+1 < result.length) { str += "\n"; }
     });
