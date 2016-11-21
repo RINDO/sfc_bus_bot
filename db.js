@@ -40,7 +40,7 @@ exports.find_next_bus = aa.thunkify((from, to, cb) => {
 
 exports.find_last_bus = aa.thunkify((from, to, cb) => {
   query(
-    'SELECT * FROM time_tables WHERE from_location LIKE $1 AND to_location LIKE $2 AND dtype = $3 ORDER BY hour DESC, minute DESC LIMIT 1',
+    'SELECT DISTINCT ON (from_location) * FROM time_tables WHERE from_location LIKE $1 AND to_location LIKE $2 AND dtype = $3 ORDER BY from_location, hour DESC, minute DESC LIMIT 2',
     [`${from}%`, `${to}%`, dtype()], cb
   );
 });
