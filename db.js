@@ -20,11 +20,11 @@ const DATE_TYPE = {
 
 // exports --------------------------------------
 
-exports.find_bus = aa.thunkify((from, to, hour, limit, cb) => {
+exports.find_bus = aa.thunkify((from, to, hour, cb) => {
   let now = moment().tz("Asia/Tokyo");
   query(
-    'SELECT * FROM time_tables WHERE from_location LIKE $1 AND to_location LIKE $2 AND dtype = $3 AND hour = $4 ORDER BY hour, minute LIMIT $5',
-    [`${from}%`, `${to}%`, dtype(), hour, limit],
+    'SELECT * FROM time_tables WHERE from_location LIKE $1 AND to_location LIKE $2 AND dtype = $3 AND hour = $4 ORDER BY hour, minute',
+    [`${from}%`, `${to}%`, dtype(), hour],
     cb
   );
 });

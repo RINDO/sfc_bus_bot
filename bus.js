@@ -17,7 +17,7 @@ exports.find_bus = aa.thunkify((f, t, hour, cb) => {
     let from  = LOC[f];
     let to    = LOC[t];
 
-    let result = yield db.find_bus(from, to, hour, 5);
+    let result = yield db.find_bus(from, to, hour);
     cb(toText(result));
   });
 })
